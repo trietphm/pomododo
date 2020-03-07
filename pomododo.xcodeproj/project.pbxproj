@@ -12,7 +12,7 @@
 		220E6E54240B85000046A114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E53240B85000046A114 /* Assets.xcassets */; };
 		220E6E57240B85000046A114 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E56240B85000046A114 /* Preview Assets.xcassets */; };
 		220E6E5A240B85000046A114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E58240B85000046A114 /* Main.storyboard */; };
-		220E6E63240BFCFB0046A114 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E62240BFCFB0046A114 /* settings.swift */; };
+		220E6E63240BFCFB0046A114 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E62240BFCFB0046A114 /* Settings.swift */; };
 		220E6E65240E84830046A114 /* BreakTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E64240E84830046A114 /* BreakTime.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +25,7 @@
 		220E6E59240B85000046A114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		220E6E5B240B85000046A114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		220E6E5C240B85010046A114 /* pomododo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pomododo.entitlements; sourceTree = "<group>"; };
-		220E6E62240BFCFB0046A114 /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
+		220E6E62240BFCFB0046A114 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		220E6E64240E84830046A114 /* BreakTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +62,7 @@
 				220E6E4F240B84FF0046A114 /* AppDelegate.swift */,
 				220E6E51240B84FF0046A114 /* ContentView.swift */,
 				220E6E64240E84830046A114 /* BreakTime.swift */,
-				220E6E62240BFCFB0046A114 /* settings.swift */,
+				220E6E62240BFCFB0046A114 /* Settings.swift */,
 				220E6E53240B85000046A114 /* Assets.xcassets */,
 				220E6E58240B85000046A114 /* Main.storyboard */,
 				220E6E5B240B85000046A114 /* Info.plist */,
@@ -154,7 +154,7 @@
 				220E6E52240B84FF0046A114 /* ContentView.swift in Sources */,
 				220E6E50240B84FF0046A114 /* AppDelegate.swift in Sources */,
 				220E6E65240E84830046A114 /* BreakTime.swift in Sources */,
-				220E6E63240BFCFB0046A114 /* settings.swift in Sources */,
+				220E6E63240BFCFB0046A114 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
