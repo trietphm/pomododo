@@ -8,21 +8,15 @@
 
 import SwiftUI
 
-struct PurpleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .foregroundColor(configuration.isPressed ? Color.white : Color.black)
-            .background(configuration.isPressed ? Color.purple : Color.white)
-            .cornerRadius(6.0)
-            .padding(.all, 3)
-    }
-}
+let defaultSessionDuration = 1 * 5
 
 struct ContentView: View {
+
     @State var isRunning = false
-    @State var remainSessionDuration = 30 * 60
+    @State var remainSessionDuration = defaultSessionDuration
     @State var timer: Timer?
     @State var sessionCount = 0
+    @State private var showSetting = false
 
     var body: some View {
         ZStack {
@@ -54,30 +48,20 @@ struct ContentView: View {
                     
                     HStack {
                         Button(action: {
-                            self.isRunning = true
-                            self.countDown()
+                            self.start()
                         }) {
                             Text("START")
-                                .fontWeight(.medium)
-                                .frame(width: 120, height: 10)
-                                .padding(.all)
+                                .modifier(MainTextButtonStyle())
                         }
-                        .buttonStyle(PurpleButtonStyle())
+                        .buttonStyle(MainButtonStyle())
                         
                         Button(action: {
-                            self.isRunning = false
-                            self.remainSessionDuration = 30*60
-                            
-                            if self.timer != nil {
-                                self.timer!.invalidate()
-                            }
+                            self.reset()
                         }) {
                             Text("RESET")
-                                .fontWeight(.medium)
-                                .frame(width: 120, height: 10)
-                                .padding(.all)
+                                .modifier(MainTextButtonStyle())
                         }
-                        .buttonStyle(PurpleButtonStyle())
+                        .buttonStyle(MainButtonStyle())
                     }
                     .padding()
                     
@@ -95,7 +79,9 @@ struct ContentView: View {
                 HStack() {
                     Spacer()
                     Button(action: {
-                        print(Text("Heloo"))
+                        let controller = WindowController(rootView: Settings())
+                        controller.window?.title = "Settings"
+                        controller.showWindow(nil)
                     }) {
                         Image("gear-64")
                             .resizable()
@@ -103,11 +89,24 @@ struct ContentView: View {
                             .frame(width: 24, height: 24)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .padding(.trailing)
                 }
-                //.offset(x: -10, y: -40)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding()
+        }
+        .frame(width: 400, height: 300)
+    }
+    
+    func start() {
+        self.isRunning = true
+        self.countDown()
+    }
+    
+    func reset() {
+        self.isRunning = false
+        self.remainSessionDuration = defaultSessionDuration
+        
+        if self.timer != nil {
+            self.timer!.invalidate()
         }
     }
     
@@ -115,7 +114,13 @@ struct ContentView: View {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {timer in
             self.remainSessionDuration -= 1
             if self.remainSessionDuration == 0 {
+                self.sessionCount += 1
                 timer.invalidate()
+                
+                // show breaktime view
+                let controller = WindowController(rootView: BreakTime())
+                controller.window?.title = "Break Time"
+                controller.showWindow(nil)
             }
         }
     }
@@ -132,6 +137,23 @@ struct ContentView: View {
     }
 }
 
+struct MainTextButtonStyle: ViewModifier {
+    func body(content: Content) -> some View {
+            content
+                .frame(width: 120, height: 10)
+                .padding(.all)
+    }
+}
+
+struct MainButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(configuration.isPressed ? Color.white : Color.black)
+            .background(configuration.isPressed ? Color.purple : Color.white)
+            .cornerRadius(6.0)
+            .padding(.all, 3)
+    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

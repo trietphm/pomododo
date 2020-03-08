@@ -78,7 +78,8 @@ struct Settings: View {
                 }
             }
             .frame(width: 550, height: 300)
-            .padding()
+                //.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding([.leading,.trailing])
         }
     }
 }

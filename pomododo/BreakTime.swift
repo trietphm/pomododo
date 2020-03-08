@@ -22,7 +22,7 @@ struct BreakTime: View {
                 Text("Go outside.")
                     .font(.system(size: 45))
                     .foregroundColor(.white)
-                    .fontWeight(.medium)
+                    .fontWeight(.light)
                 
                 Text("4:32")
                     .font(.system(size: 70))
@@ -33,7 +33,7 @@ struct BreakTime: View {
                     print(Text("hleoo"))
                 }) {
                     Text("I'D RATHER WORK")
-                        .fontWeight(.medium)
+                        .fontWeight(.light)
                         .foregroundColor(Color.white)
                         .frame(width: 120, height: 10)
                         .cornerRadius(6.0)
@@ -42,10 +42,11 @@ struct BreakTime: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .cornerRadius(6.0)
+                .padding()
             }
             .padding()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(width: 1100, height: 750)
     }
 }
 
