@@ -11,12 +11,13 @@ import SwiftUI
 let defaultSessionDuration = 1 * 5
 
 struct ContentView: View {
-
+    
     @State var isRunning = false
-    @State var remainSessionDuration = defaultSessionDuration
     @State var timer: Timer?
     @State var sessionCount = 0
     @State private var showSetting = false
+    @State var remainSessionDuration = defaultSessionDuration
+    @ObservedObject var setting = Setting()
 
     var body: some View {
         ZStack {
@@ -27,6 +28,7 @@ struct ContentView: View {
                 ]),
                 startPoint: .bottomLeading,
                 endPoint: .topTrailing)
+            .frame(height: 350) // This is to cover the title bar
             
             VStack {
                 
@@ -79,8 +81,8 @@ struct ContentView: View {
                 HStack() {
                     Spacer()
                     Button(action: {
-                        let controller = WindowController(rootView: Settings())
-                        controller.window?.title = "Settings"
+                        let controller = WindowController(rootView: SettingView())
+                        controller.window?.titlebarAppearsTransparent = true
                         controller.showWindow(nil)
                     }) {
                         Image("gear-64")
@@ -91,11 +93,13 @@ struct ContentView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
             }
-            .padding()
+            .padding([.trailing, .leading])
         }
         .frame(width: 400, height: 300)
+        .offset(y: -5)
+        
     }
-    
+
     func start() {
         self.isRunning = true
         self.countDown()
@@ -115,10 +119,11 @@ struct ContentView: View {
             self.remainSessionDuration -= 1
             if self.remainSessionDuration == 0 {
                 self.sessionCount += 1
+                self.remainSessionDuration = defaultSessionDuration
                 timer.invalidate()
                 
                 // show breaktime view
-                let controller = WindowController(rootView: BreakTime())
+                let controller = WindowController(rootView: BreakTimeView())
                 controller.window?.title = "Break Time"
                 controller.showWindow(nil)
             }

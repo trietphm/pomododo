@@ -15,6 +15,7 @@ struct BreakTimeView: View {
         ZStack {
             Image(randomImage[Int.random(in: 0...2)])
                 .resizable()
+                .frame(height: 800)
             
             VStack {
 
@@ -30,13 +31,13 @@ struct BreakTimeView: View {
                     .fontWeight(.light)
                 
                 Button(action: {
-                    print(Text("hleoo"))
+                    NSApplication.shared.keyWindow?.close()
                 }) {
                     Text("I'D RATHER WORK")
                         .fontWeight(.light)
                         .foregroundColor(Color.white)
-                        .frame(width: 120, height: 10)
                         .cornerRadius(6.0)
+                        .frame(width: 120, height: 10)
                         .padding(.all)
                         .border(Color.white, width: 2)
                 }
@@ -47,6 +48,7 @@ struct BreakTimeView: View {
             .padding()
         }
         .frame(width: 1100, height: 750)
+        .offset(y: -10)
     }
 }
 

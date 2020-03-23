@@ -42,6 +42,7 @@ struct SettingView: View {
     var body: some View {
         ZStack {
             Color(red: 37/255, green: 42/255, blue: 47/255)
+            .frame(height: 350)
             
             VStack(spacing: 15) {
                 Text("Settings")
@@ -77,10 +78,11 @@ struct SettingView: View {
                         .modifier(SettingTextFieldStyle())
                 }
             }
-            .frame(width: 550, height: 300)
                 //.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding([.leading,.trailing])
         }
+            .frame(width: 550, height: 300)
+        .offset(y: -10)
     }
 }
 

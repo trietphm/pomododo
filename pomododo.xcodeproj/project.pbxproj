@@ -12,9 +12,10 @@
 		220E6E54240B85000046A114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E53240B85000046A114 /* Assets.xcassets */; };
 		220E6E57240B85000046A114 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E56240B85000046A114 /* Preview Assets.xcassets */; };
 		220E6E5A240B85000046A114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E58240B85000046A114 /* Main.storyboard */; };
-		220E6E63240BFCFB0046A114 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E62240BFCFB0046A114 /* Settings.swift */; };
-		220E6E65240E84830046A114 /* BreakTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E64240E84830046A114 /* BreakTime.swift */; };
+		220E6E63240BFCFB0046A114 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E62240BFCFB0046A114 /* SettingView.swift */; };
+		220E6E65240E84830046A114 /* BreakTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E64240E84830046A114 /* BreakTimeView.swift */; };
 		227665C22414EFDC00F5E2F3 /* WindowControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227665C12414EFDC00F5E2F3 /* WindowControlller.swift */; };
+		22C710EA24153AD100DBE7EF /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C710E924153AD100DBE7EF /* Setting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +27,10 @@
 		220E6E59240B85000046A114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		220E6E5B240B85000046A114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		220E6E5C240B85010046A114 /* pomododo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pomododo.entitlements; sourceTree = "<group>"; };
-		220E6E62240BFCFB0046A114 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		220E6E64240E84830046A114 /* BreakTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakTime.swift; sourceTree = "<group>"; };
+		220E6E62240BFCFB0046A114 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		220E6E64240E84830046A114 /* BreakTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakTimeView.swift; sourceTree = "<group>"; };
 		227665C12414EFDC00F5E2F3 /* WindowControlller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControlller.swift; sourceTree = "<group>"; };
+		22C710E924153AD100DBE7EF /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,10 +63,11 @@
 		220E6E4E240B84FF0046A114 /* pomododo */ = {
 			isa = PBXGroup;
 			children = (
+				22C710E624153A4500DBE7EF /* Models */,
 				220E6E4F240B84FF0046A114 /* AppDelegate.swift */,
 				220E6E51240B84FF0046A114 /* ContentView.swift */,
-				220E6E64240E84830046A114 /* BreakTime.swift */,
-				220E6E62240BFCFB0046A114 /* Settings.swift */,
+				220E6E64240E84830046A114 /* BreakTimeView.swift */,
+				220E6E62240BFCFB0046A114 /* SettingView.swift */,
 				220E6E53240B85000046A114 /* Assets.xcassets */,
 				220E6E58240B85000046A114 /* Main.storyboard */,
 				220E6E5B240B85000046A114 /* Info.plist */,
@@ -81,6 +84,14 @@
 				220E6E56240B85000046A114 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		22C710E624153A4500DBE7EF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				22C710E924153AD100DBE7EF /* Setting.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,8 +167,9 @@
 			files = (
 				220E6E52240B84FF0046A114 /* ContentView.swift in Sources */,
 				220E6E50240B84FF0046A114 /* AppDelegate.swift in Sources */,
-				220E6E65240E84830046A114 /* BreakTime.swift in Sources */,
-				220E6E63240BFCFB0046A114 /* Settings.swift in Sources */,
+				22C710EA24153AD100DBE7EF /* Setting.swift in Sources */,
+				220E6E65240E84830046A114 /* BreakTimeView.swift in Sources */,
+				220E6E63240BFCFB0046A114 /* SettingView.swift in Sources */,
 				227665C22414EFDC00F5E2F3 /* WindowControlller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

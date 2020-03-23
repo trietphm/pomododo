@@ -26,6 +26,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered, defer: false)
         window.center()
         window.setFrameAutosaveName("Main Window")
+        window.titlebarAppearsTransparent = true
+//        window.titleVisibility = NSWindow.TitleVisibility.hidden
+//        window.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
     }
@@ -33,7 +36,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-
 }
-
