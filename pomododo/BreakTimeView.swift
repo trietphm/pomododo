@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BreakTime: View {
+struct BreakTimeView: View {
     let randomImage = ["1", "2", "3"]
     
     var body: some View {
@@ -52,6 +52,6 @@ struct BreakTime: View {
 
 struct BreakTime_Previews: PreviewProvider {
     static var previews: some View {
-        BreakTime()
+        BreakTimeView()
     }
 }

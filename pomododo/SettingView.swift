@@ -34,7 +34,7 @@ struct SettingTextFieldStyle: ViewModifier {
     }
 }
 
-struct Settings: View {
+struct SettingView: View {
     @State var sessionLength: String = "25"
     @State var shortBreakLength: String = "5"
     @State var longBreakLength: String = "10"
@@ -86,6 +86,6 @@ struct Settings: View {
 
 struct settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        SettingView()
     }
 }
