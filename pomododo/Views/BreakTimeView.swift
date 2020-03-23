@@ -9,12 +9,22 @@
 import SwiftUI
 
 struct BreakTimeView: View {
+    @EnvironmentObject var settings: Setting
+    
+    var body: some View {
+        BreakTimeInternalView(PomoTimer(remainSessionDuration: settings.shortBreakLength)
+        )
+    }
+}
+
+struct BreakTimeInternalView: View {
     let randomImage: String
-    @ObservedObject var pomoTimer = PomoTimer(false)
+    @ObservedObject var pomoTimer: PomoTimer
    
-    init() {
+    init(_ pomoTimer: PomoTimer) {
+        self.pomoTimer = pomoTimer
         self.randomImage = String(Int.random(in: 1...3))
-        self.pomoTimer.start()
+        self.pomoTimer.start(closeWindow)
     }
 
     var body: some View {
@@ -54,6 +64,10 @@ struct BreakTimeView: View {
         }
         .frame(width: 1100, height: 750)
         .offset(y: -10)
+    }
+    
+    func closeWindow() {
+        NSApplication.shared.keyWindow?.close()
     }
 }
 

@@ -14,11 +14,13 @@ class Setting: ObservableObject {
     @Published var shortBreakLength: Int
     @Published var longBreakLength: Int
     @Published var sessionsForLongBreak: Int
+    @Published var numberOfSession: Int
     
     init() {
-        self.sessionLength = 25*60
+        self.sessionLength = 1// 25*60
         self.shortBreakLength = 5*60
         self.longBreakLength = 10*60
         self.sessionsForLongBreak = 5
+        self.numberOfSession = 10
     }
 }

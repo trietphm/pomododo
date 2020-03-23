@@ -9,16 +9,16 @@
 import Foundation
 import SwiftUI
 
-let defaultSessionDuration = 1 * 3
 class PomoTimer: ObservableObject {
-    @Published var remainSessionDuration = defaultSessionDuration // seconds
+    @Published var remainSessionDuration: Int
     @Published var sessionCount = 0
     @Published var timer: Timer?
     @Published var isRunning = false
-    private var showBreakTime = true
-    
-    init(_ showBreakTime: Bool) {
-        self.showBreakTime = showBreakTime
+    private var defaultSessionDuration: Int
+
+    init(remainSessionDuration: Int) {
+        self.defaultSessionDuration = remainSessionDuration
+        self.remainSessionDuration = remainSessionDuration
     }
     
     func displayTimer() -> String {
@@ -32,36 +32,29 @@ class PomoTimer: ObservableObject {
         return num < 10 ? "0\(num)" : "\(num)"
     }
     
-   func start() {
+    func start(_ closure: @escaping()-> Void) {
         self.isRunning = true
-        self.countDown()
+        self.countDown(closure)
     }
     
     func reset() {
         self.isRunning = false
-        self.remainSessionDuration = defaultSessionDuration
+        self.remainSessionDuration = self.defaultSessionDuration
         
         if self.timer != nil {
             self.timer!.invalidate()
         }
     }
 
-    func countDown() {
+    func countDown(_ closure: @escaping() -> Void) {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {timer in
             self.remainSessionDuration -= 1
             if self.remainSessionDuration == 0 {
                 self.sessionCount += 1
-                self.remainSessionDuration = defaultSessionDuration
+                self.remainSessionDuration = self.defaultSessionDuration
                 timer.invalidate()
                 
-                // show breaktime view
-                if self.showBreakTime {
-                    let controller = WindowController(rootView: BreakTimeView())
-                    controller.window?.title = "Break Time"
-                    controller.showWindow(nil)
-                } else {
-                    NSApplication.shared.keyWindow?.close()
-                }
+                closure()
             }
         }
     }

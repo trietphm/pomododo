@@ -10,11 +10,24 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var pomoTimer = PomoTimer(true)
+    @EnvironmentObject var settings: Setting
+    
+    var body: some View {
+        ContentInternalView(PomoTimer(remainSessionDuration: settings.sessionLength))
+    }
+}
+
+struct ContentInternalView: View {
+    @EnvironmentObject var settings: Setting
+    @ObservedObject var pomoTimer: PomoTimer
+
     @State var isRunning = false
     @State private var showSetting = false
-    @ObservedObject var setting = Setting()
-    
+
+    init(_ pomoTimer: PomoTimer) {
+        self.pomoTimer = pomoTimer
+    }
+
     var body: some View {
         ZStack {
             LinearGradient(
@@ -46,7 +59,7 @@ struct ContentView: View {
                     
                     HStack {
                         Button(action: {
-                            self.pomoTimer.start()
+                            self.pomoTimer.start(self.openBreakTimeView)
                         }) {
                             Text("START")
                                 .modifier(MainTextButtonStyle())
@@ -95,7 +108,15 @@ struct ContentView: View {
         .offset(y: -5)
         
     }
+    
+    func openBreakTimeView() {
+        let controller = WindowController(rootView: BreakTimeView().environmentObject(self.settings))
+        controller.window?.title = "Break Time"
+        controller.showWindow(nil)
+    }
 }
+
+
 
 struct MainTextButtonStyle: ViewModifier {
     func body(content: Content) -> some View {
