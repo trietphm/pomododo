@@ -8,17 +8,13 @@
 
 import SwiftUI
 
-let defaultSessionDuration = 1 * 5
 
 struct ContentView: View {
-    
+    @ObservedObject var pomoTimer = PomoTimer(true)
     @State var isRunning = false
-    @State var timer: Timer?
-    @State var sessionCount = 0
     @State private var showSetting = false
-    @State var remainSessionDuration = defaultSessionDuration
     @ObservedObject var setting = Setting()
-
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -36,7 +32,7 @@ struct ContentView: View {
                 
                 VStack {
                     HStack(alignment: .center) {
-                        Text("\(self.displayTimer())")
+                        Text("\(self.pomoTimer.displayTimer())")
                             .font(.system(size: 80))
                             .fontWeight(.light)
                             .foregroundColor(Color.white)
@@ -50,7 +46,7 @@ struct ContentView: View {
                     
                     HStack {
                         Button(action: {
-                            self.start()
+                            self.pomoTimer.start()
                         }) {
                             Text("START")
                                 .modifier(MainTextButtonStyle())
@@ -58,7 +54,7 @@ struct ContentView: View {
                         .buttonStyle(MainButtonStyle())
                         
                         Button(action: {
-                            self.reset()
+                            self.pomoTimer.reset()
                         }) {
                             Text("RESET")
                                 .modifier(MainTextButtonStyle())
@@ -72,7 +68,7 @@ struct ContentView: View {
                         .font(.subheadline)
                         .foregroundColor(Color.white)
                     
-                    Text("\(self.sessionCount)/10")
+                    Text("\(self.pomoTimer.sessionCount)/10")
                         .fontWeight(.light)
                         .font(.subheadline)
                         .foregroundColor(Color.white)
@@ -98,47 +94,6 @@ struct ContentView: View {
         .frame(width: 400, height: 300)
         .offset(y: -5)
         
-    }
-
-    func start() {
-        self.isRunning = true
-        self.countDown()
-    }
-    
-    func reset() {
-        self.isRunning = false
-        self.remainSessionDuration = defaultSessionDuration
-        
-        if self.timer != nil {
-            self.timer!.invalidate()
-        }
-    }
-    
-    func countDown() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {timer in
-            self.remainSessionDuration -= 1
-            if self.remainSessionDuration == 0 {
-                self.sessionCount += 1
-                self.remainSessionDuration = defaultSessionDuration
-                timer.invalidate()
-                
-                // show breaktime view
-                let controller = WindowController(rootView: BreakTimeView())
-                controller.window?.title = "Break Time"
-                controller.showWindow(nil)
-            }
-        }
-    }
-    
-    func displayTimer() -> String {
-        let minutes = self.remainSessionDuration / 60
-        let seconds = self.remainSessionDuration % 60
-        
-        return "\(self.properNumber(minutes)):\(self.properNumber(seconds))"
-    }
-    
-    func properNumber(_ num: Int) -> String {
-       return num < 10 ? "0\(num)" : "\(num)"
     }
 }
 

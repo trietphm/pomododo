@@ -9,23 +9,28 @@
 import SwiftUI
 
 struct BreakTimeView: View {
-    let randomImage = ["1", "2", "3"]
-    
+    let randomImage: String
+    @ObservedObject var pomoTimer = PomoTimer(false)
+   
+    init() {
+        self.randomImage = String(Int.random(in: 1...3))
+        self.pomoTimer.start()
+    }
+
     var body: some View {
         ZStack {
-            Image(randomImage[Int.random(in: 0...2)])
+            Image(randomImage)
                 .resizable()
                 .frame(height: 800)
             
             VStack {
-
                 Spacer()
                 Text("Go outside.")
                     .font(.system(size: 45))
                     .foregroundColor(.white)
                     .fontWeight(.light)
                 
-                Text("4:32")
+                Text("\(self.pomoTimer.displayTimer())")
                     .font(.system(size: 70))
                     .foregroundColor(.white)
                     .fontWeight(.light)
