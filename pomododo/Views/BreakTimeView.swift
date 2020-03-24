@@ -12,8 +12,7 @@ struct BreakTimeView: View {
     @EnvironmentObject var settings: Setting
     
     var body: some View {
-        BreakTimeInternalView(PomoTimer(remainSessionDuration: settings.shortBreakLength)
-        )
+        BreakTimeInternalView(PomoTimer(remainSessionDuration: settings.shortBreakLength))
     }
 }
 
@@ -74,5 +73,6 @@ struct BreakTimeInternalView: View {
 struct BreakTime_Previews: PreviewProvider {
     static var previews: some View {
         BreakTimeView()
+            .environmentObject(Setting())
     }
 }

@@ -18,7 +18,7 @@ struct TextLabelStyle: ViewModifier {
     }
 }
 
-struct SettingTextFieldStyle: ViewModifier {
+struct SettingTextFieldNumberStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(Font
@@ -35,10 +35,8 @@ struct SettingTextFieldStyle: ViewModifier {
 }
 
 struct SettingView: View {
-    @State var sessionLength: String = "25"
-    @State var shortBreakLength: String = "5"
-    @State var longBreakLength: String = "10"
-    
+    @EnvironmentObject var settings: Setting
+
     var body: some View {
         ZStack {
             Color(red: 37/255, green: 42/255, blue: 47/255)
@@ -57,25 +55,33 @@ struct SettingView: View {
                     Text("Session Length (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("25", text: $sessionLength)
+                    TextField("25", value: $settings.sessionLength, formatter: NumberFormatter())
                         .textFieldStyle(PlainTextFieldStyle())
-                        .modifier(SettingTextFieldStyle())
+                        .modifier(SettingTextFieldNumberStyle())
                 }
                 HStack(spacing: 18) {
                     Text("Short break length (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("5", text: $shortBreakLength)
+                    TextField("5", value: $settings.shortBreakLength, formatter: NumberFormatter())
                         .textFieldStyle(PlainTextFieldStyle())
-                        .modifier(SettingTextFieldStyle())
+                        .modifier(SettingTextFieldNumberStyle())
                 }
                 HStack(spacing: 46) {
                     Text("Long break (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("15", text: $longBreakLength)
+                    TextField("15", value: $settings.longBreakLength, formatter: NumberFormatter())
                         .textFieldStyle(PlainTextFieldStyle())
-                        .modifier(SettingTextFieldStyle())
+                        .modifier(SettingTextFieldNumberStyle())
+                }
+                
+                Button(action: {
+                    print("\(self.settings.shortBreakLength)")
+                    print("\(self.settings.longBreakLength)")
+                    print("\(self.settings.sessionLength)")
+                }) {
+                Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/)
                 }
             }
                 //.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -89,5 +95,6 @@ struct SettingView: View {
 struct settings_Previews: PreviewProvider {
     static var previews: some View {
         SettingView()
+            .environmentObject(Setting())
     }
 }

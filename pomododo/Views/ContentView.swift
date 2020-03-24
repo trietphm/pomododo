@@ -90,9 +90,7 @@ struct ContentInternalView: View {
                 HStack() {
                     Spacer()
                     Button(action: {
-                        let controller = WindowController(rootView: SettingView())
-                        controller.window?.titlebarAppearsTransparent = true
-                        controller.showWindow(nil)
+                        self.openSettingView()
                     }) {
                         Image("gear-64")
                             .resizable()
@@ -111,7 +109,13 @@ struct ContentInternalView: View {
     
     func openBreakTimeView() {
         let controller = WindowController(rootView: BreakTimeView().environmentObject(self.settings))
-        controller.window?.title = "Break Time"
+        controller.window?.titlebarAppearsTransparent = true
+        controller.showWindow(nil)
+    }
+    
+    func openSettingView() {
+        let controller = WindowController(rootView: SettingView().environmentObject(self.settings))
+        controller.window?.titlebarAppearsTransparent = true
         controller.showWindow(nil)
     }
 }
@@ -139,5 +143,6 @@ struct MainButtonStyle: ButtonStyle {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(Setting())
     }
 }
