@@ -29,23 +29,13 @@ struct SettingTextFieldNumberStyle: ViewModifier {
     }
 }
 
+
+
 struct SettingView: View {
     @EnvironmentObject var settings: Setting
-    @State var location: Int
-
+    @State var localSetting: Setting
+    
     var body: some View {
-        let binding = Binding<String>(get: {
-            String(self.location)
-        }, set: {
-            if let newValue = NumberFormatter().number(from: $0) {
-                self.location = newValue.intValue
-            }
-            print(self.location)
-            print(self.settings.sessionLength)
-            self.settings.sessionLength = self.location
-        })
-
-
         return ZStack {
             VStack(spacing: 15) {
                 Text("Settings")
@@ -58,7 +48,10 @@ struct SettingView: View {
                     Text("Session Length (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("25", text: binding)
+                    TextField("25", text: Binding<String>(
+                        get: { String(self.localSetting.sessionLength) },
+                        set: { self.setBinding(v: $0, localValue:  &self.localSetting.sessionLength, settingValue: &self.settings.sessionLength) }
+                    ))
                         .textFieldStyle(PlainTextFieldStyle())
                         .modifier(SettingTextFieldNumberStyle())
                 }
@@ -66,7 +59,10 @@ struct SettingView: View {
                     Text("Short break length (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("5", value: $settings.shortBreakLength, formatter: NumberFormatter())
+                    TextField("5", text: Binding<String>(
+                        get: { String(self.localSetting.shortBreakLength) },
+                        set: { self.setBinding(v: $0, localValue:  &self.localSetting.shortBreakLength, settingValue: &self.settings.shortBreakLength) }
+                    ))
                         .textFieldStyle(PlainTextFieldStyle())
                         .modifier(SettingTextFieldNumberStyle())
                 }
@@ -74,7 +70,10 @@ struct SettingView: View {
                     Text("Long break (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("15", value: $settings.longBreakLength, formatter: NumberFormatter())
+                    TextField("15", text: Binding<String>(
+                        get: { String(self.localSetting.longBreakLength) },
+                        set: { self.setBinding(v: $0, localValue:  &self.localSetting.longBreakLength, settingValue: &self.settings.longBreakLength) }
+                    ))
                         .textFieldStyle(PlainTextFieldStyle())
                         .modifier(SettingTextFieldNumberStyle())
                 }
@@ -84,13 +83,19 @@ struct SettingView: View {
         }
         .frame(width: 550, height: 270)
     }
+    
+    func setBinding(v: String, localValue: inout Int, settingValue: inout Int) {
+        if let newValue = NumberFormatter().number(from: v) {
+            localValue = newValue.intValue
+        }
+        settingValue = localValue
+    }
 }
 
 struct settings_Previews: PreviewProvider {
     static var previews: some View {
         let setting = Setting()
-        
-        return SettingView(location: setting.sessionLength)
+        return SettingView(localSetting: setting)
             .environmentObject(setting)
     }
 }
