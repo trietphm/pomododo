@@ -29,12 +29,24 @@ struct SettingTextFieldNumberStyle: ViewModifier {
     }
 }
 
-
 struct SettingView: View {
     @EnvironmentObject var settings: Setting
+    @State var location: Int
 
     var body: some View {
-        ZStack {
+        let binding = Binding<String>(get: {
+            String(self.location)
+        }, set: {
+            if let newValue = NumberFormatter().number(from: $0) {
+                self.location = newValue.intValue
+            }
+            print(self.location)
+            print(self.settings.sessionLength)
+            self.settings.sessionLength = self.location
+        })
+
+
+        return ZStack {
             VStack(spacing: 15) {
                 Text("Settings")
                     .font(Font
@@ -42,12 +54,11 @@ struct SettingView: View {
                         .weight(.light))
                     .padding(.bottom)
                 
-
                 HStack(spacing: 31) {
                     Text("Session Length (Minutes)")
                         .modifier(TextLabelStyle())
                     Spacer()
-                    TextField("25", value: $settings.sessionLength, formatter: NumberFormatter())
+                    TextField("25", text: binding)
                         .textFieldStyle(PlainTextFieldStyle())
                         .modifier(SettingTextFieldNumberStyle())
                 }
@@ -71,15 +82,16 @@ struct SettingView: View {
                 //.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding([.leading,.trailing])
         }
-            .frame(width: 550, height: 300)
-        .offset(y: -10)
+        .frame(width: 550, height: 270)
     }
 }
 
 struct settings_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
-            .environmentObject(Setting())
+        let setting = Setting()
+        
+        return SettingView(location: setting.sessionLength)
+            .environmentObject(setting)
     }
 }
 

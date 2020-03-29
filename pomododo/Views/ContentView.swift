@@ -114,7 +114,11 @@ struct ContentInternalView: View {
     }
     
     func openSettingView() {
-        let controller = WindowController(rootView: SettingView().environmentObject(self.settings))
+        let controller = WindowController(
+            rootView: SettingView(
+                location: self.settings.sessionLength).environmentObject(self.settings
+            )
+        )
         controller.window?.titlebarAppearsTransparent = true
         controller.showWindow(nil)
     }
