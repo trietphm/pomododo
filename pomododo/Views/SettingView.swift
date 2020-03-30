@@ -33,9 +33,10 @@ struct SettingTextFieldNumberStyle: ViewModifier {
 
 struct SettingView: View {
     @EnvironmentObject var settings: Setting
-    @State var localSetting: Setting
+    @State private var localSetting = Setting()
     
     var body: some View {
+        self.localSetting = self.settings
         return ZStack {
             VStack(spacing: 15) {
                 Text("Settings")
@@ -77,11 +78,24 @@ struct SettingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .modifier(SettingTextFieldNumberStyle())
                 }
+                
+                Button(action: {
+                    self.settings.isOpenningSetting = false
+                    NSApplication.shared.keyWindow?.close()
+                }) {
+                    Text("SAVE")
+                        .fontWeight(.medium)
+                        .frame(width: 120, height: 10)
+                        .padding(.all)
+                        .border(Color.black, width: 1)
+                        .cornerRadius(2.0)
+                }
+                .buttonStyle(PlainButtonStyle())
             }
                 //.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding([.leading,.trailing])
         }
-        .frame(width: 550, height: 270)
+        .frame(width: 550, height: 330)
     }
     
     func setBinding(v: String, localValue: inout Int, settingValue: inout Int) {
@@ -92,10 +106,14 @@ struct SettingView: View {
     }
 }
 
+func windowWillClose(_ notification: Notification) {
+    print("willClose")
+}
+
 struct settings_Previews: PreviewProvider {
     static var previews: some View {
         let setting = Setting()
-        return SettingView(localSetting: setting)
+        return SettingView()
             .environmentObject(setting)
     }
 }

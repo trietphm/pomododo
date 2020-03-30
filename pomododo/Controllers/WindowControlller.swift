@@ -14,9 +14,13 @@ class WindowController<RootView : View>: NSWindowController {
     convenience init(rootView: RootView) {
         let hostingController = NSHostingController(rootView: rootView)
         let window = NSWindow(contentViewController: hostingController)
+        window.styleMask = [
+            NSWindow.StyleMask.titled,
+            NSWindow.StyleMask.fullSizeContentView
+        ]
         window.titlebarAppearsTransparent = true
         window.titleVisibility = .hidden
-        window.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+        window.setAccessibilityFullScreenButton(nil)
         self.init(window: window)
     }
 }

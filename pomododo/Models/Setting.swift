@@ -15,6 +15,7 @@ class Setting: ObservableObject {
     @Published var longBreakLength: Int
     @Published var sessionsForLongBreak: Int
     @Published var numberOfSession: Int
+    @Published var isOpenningSetting: Bool
     
     init() {
         self.sessionLength = 1// 25*60
@@ -22,5 +23,6 @@ class Setting: ObservableObject {
         self.longBreakLength = 10*60
         self.sessionsForLongBreak = 5
         self.numberOfSession = 10
+        self.isOpenningSetting = false
     }
 }
