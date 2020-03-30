@@ -127,26 +127,6 @@ struct ContentInternalView: View {
     }
 }
 
-
-
-struct MainTextButtonStyle: ViewModifier {
-    func body(content: Content) -> some View {
-            content
-                .frame(width: 120, height: 10)
-                .padding(.all)
-    }
-}
-
-struct MainButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .foregroundColor(configuration.isPressed ? Color.white : Color.black)
-            .background(configuration.isPressed ? Color.purple : Color.white)
-            .cornerRadius(6.0)
-            .padding(.all, 3)
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

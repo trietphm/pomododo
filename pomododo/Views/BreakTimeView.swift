@@ -48,16 +48,9 @@ struct BreakTimeInternalView: View {
                     NSApplication.shared.keyWindow?.close()
                 }) {
                     Text("I'D RATHER WORK")
-                        .fontWeight(.light)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(6.0)
-                        .frame(width: 120, height: 10)
-                        .padding(.all)
-                        .border(Color.white, width: 2)
+                        .modifier(BreakTimeTextButtonStyle())
                 }
-                .buttonStyle(PlainButtonStyle())
-                .cornerRadius(6.0)
-                .padding()
+                .buttonStyle(BreakTimeButtonStyle())
             }
             .padding()
         }
@@ -67,6 +60,24 @@ struct BreakTimeInternalView: View {
     
     func closeWindow() {
         NSApplication.shared.keyWindow?.close()
+    }
+}
+
+struct BreakTimeTextButtonStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 120, height: 10)
+            .padding(.all)
+    }
+}
+
+struct BreakTimeButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(configuration.isPressed ? Color.white : Color.black)
+            .background(configuration.isPressed ? Color.purple : Color.white)
+            .cornerRadius(6.0)
+            .padding(.all)
     }
 }
 

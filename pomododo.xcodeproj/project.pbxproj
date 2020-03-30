@@ -14,6 +14,7 @@
 		220E6E5A240B85000046A114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220E6E58240B85000046A114 /* Main.storyboard */; };
 		220E6E63240BFCFB0046A114 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E62240BFCFB0046A114 /* SettingView.swift */; };
 		220E6E65240E84830046A114 /* BreakTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E6E64240E84830046A114 /* BreakTimeView.swift */; };
+		2275C012243249F900DCE59E /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275C011243249F900DCE59E /* ButtonStyle.swift */; };
 		227665C22414EFDC00F5E2F3 /* WindowControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227665C12414EFDC00F5E2F3 /* WindowControlller.swift */; };
 		22C710EA24153AD100DBE7EF /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C710E924153AD100DBE7EF /* Setting.swift */; };
 		22F34D102428FCE4000ECC0A /* PomoTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F34D0F2428FCE4000ECC0A /* PomoTimer.swift */; };
@@ -30,6 +31,7 @@
 		220E6E5C240B85010046A114 /* pomododo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pomododo.entitlements; sourceTree = "<group>"; };
 		220E6E62240BFCFB0046A114 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		220E6E64240E84830046A114 /* BreakTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakTimeView.swift; sourceTree = "<group>"; };
+		2275C011243249F900DCE59E /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		227665C12414EFDC00F5E2F3 /* WindowControlller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControlller.swift; sourceTree = "<group>"; };
 		22C710E924153AD100DBE7EF /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		22F34D0F2428FCE4000ECC0A /* PomoTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoTimer.swift; sourceTree = "<group>"; };
@@ -65,9 +67,10 @@
 		220E6E4E240B84FF0046A114 /* pomododo */ = {
 			isa = PBXGroup;
 			children = (
+				2275C010243249E200DCE59E /* Style */,
 				22F34D0D2428FCB4000ECC0A /* Controllers */,
-				22F34D0C2428FCA4000ECC0A /* Views */,
 				22C710E624153A4500DBE7EF /* Models */,
+				22F34D0C2428FCA4000ECC0A /* Views */,
 				220E6E4F240B84FF0046A114 /* AppDelegate.swift */,
 				220E6E53240B85000046A114 /* Assets.xcassets */,
 				220E6E58240B85000046A114 /* Main.storyboard */,
@@ -84,6 +87,14 @@
 				220E6E56240B85000046A114 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2275C010243249E200DCE59E /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				2275C011243249F900DCE59E /* ButtonStyle.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 		22C710E624153A4500DBE7EF /* Models */ = {
@@ -185,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				220E6E52240B84FF0046A114 /* ContentView.swift in Sources */,
+				2275C012243249F900DCE59E /* ButtonStyle.swift in Sources */,
 				220E6E50240B84FF0046A114 /* AppDelegate.swift in Sources */,
 				22F34D102428FCE4000ECC0A /* PomoTimer.swift in Sources */,
 				22C710EA24153AD100DBE7EF /* Setting.swift in Sources */,
