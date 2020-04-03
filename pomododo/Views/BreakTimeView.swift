@@ -12,16 +12,18 @@ struct BreakTimeView: View {
     @EnvironmentObject var settings: Setting
     
     var body: some View {
-        BreakTimeInternalView(PomoTimer(remainSessionDuration: settings.shortBreakLength))
+        BreakTimeInternalView(settings)
     }
 }
 
 struct BreakTimeInternalView: View {
     let randomImage: String
+    @ObservedObject var localSettings: Setting
     @ObservedObject var pomoTimer: PomoTimer
    
-    init(_ pomoTimer: PomoTimer) {
-        self.pomoTimer = pomoTimer
+    init(_ settings: Setting) {
+        self.localSettings = settings
+        self.pomoTimer = PomoTimer(remainSessionDuration: settings.shortBreakLength)
         self.randomImage = String(Int.random(in: 1...3))
         self.pomoTimer.start(closeWindow)
     }
@@ -45,6 +47,7 @@ struct BreakTimeInternalView: View {
                     .fontWeight(.light)
                 
                 Button(action: {
+                    self.localSettings.isBreakingTime = false
                     NSApplication.shared.keyWindow?.close()
                 }) {
                     Text("I'D RATHER WORK")
@@ -59,6 +62,7 @@ struct BreakTimeInternalView: View {
     }
     
     func closeWindow() {
+        self.localSettings.isBreakingTime = false
         NSApplication.shared.keyWindow?.close()
     }
 }

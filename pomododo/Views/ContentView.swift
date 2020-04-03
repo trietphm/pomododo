@@ -59,6 +59,9 @@ struct ContentInternalView: View {
                     
                     HStack {
                         Button(action: {
+                            if self.settings.isBreakingTime {
+                                return
+                            }
                             self.pomoTimer.start(self.openBreakTimeView)
                         }) {
                             Text("START")
@@ -108,6 +111,7 @@ struct ContentInternalView: View {
     }
     
     func openBreakTimeView() {
+        self.settings.isBreakingTime = true
         let controller = WindowController(rootView: BreakTimeView().environmentObject(self.settings))
         controller.window?.titlebarAppearsTransparent = true
         controller.showWindow(nil)

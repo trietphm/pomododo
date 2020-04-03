@@ -15,7 +15,7 @@ class PomoTimer: ObservableObject {
     @Published var timer: Timer?
     @Published var isRunning = false
     private var defaultSessionDuration: Int
-
+    
     init(remainSessionDuration: Int) {
         self.defaultSessionDuration = remainSessionDuration
         self.remainSessionDuration = remainSessionDuration
