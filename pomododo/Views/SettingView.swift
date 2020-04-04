@@ -29,8 +29,6 @@ struct SettingTextFieldNumberStyle: ViewModifier {
     }
 }
 
-
-
 struct SettingView: View {
     @EnvironmentObject var settings: Setting
     @State private var localSetting = Setting()
@@ -78,6 +76,17 @@ struct SettingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .modifier(SettingTextFieldNumberStyle())
                 }
+                HStack(spacing: 34) {
+                    Text("Sessions for Long break")
+                        .modifier(TextLabelStyle())
+                    Spacer()
+                    TextField("5", text: Binding<String>(
+                        get: { String(self.localSetting.sessionsForLongBreak) },
+                        set: { self.setBinding(v: $0, localValue:  &self.localSetting.sessionsForLongBreak, settingValue: &self.settings.sessionsForLongBreak) }
+                    ))
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .modifier(SettingTextFieldNumberStyle())
+                }
                 
                 Button(action: {
                     self.settings.isOpenningSetting = false
@@ -95,7 +104,7 @@ struct SettingView: View {
                 //.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding([.leading,.trailing])
         }
-        .frame(width: 550, height: 330)
+        .frame(width: 550, height: 390)
     }
     
     func setBinding(v: String, localValue: inout Int, settingValue: inout Int) {

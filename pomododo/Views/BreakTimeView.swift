@@ -10,9 +10,10 @@ import SwiftUI
 
 struct BreakTimeView: View {
     @EnvironmentObject var settings: Setting
+    var isShortBreak: Bool
     
     var body: some View {
-        BreakTimeInternalView(settings)
+        return BreakTimeInternalView(settings, isShortBreak)
     }
 }
 
@@ -21,9 +22,10 @@ struct BreakTimeInternalView: View {
     @ObservedObject var localSettings: Setting
     @ObservedObject var pomoTimer: PomoTimer
    
-    init(_ settings: Setting) {
+    init(_ settings: Setting, _ isShortBreak: Bool) {
         self.localSettings = settings
-        self.pomoTimer = PomoTimer(remainSessionDuration: settings.shortBreakLength)
+        let remainSessionDuration = isShortBreak ? settings.shortBreakLength : settings.longBreakLength;
+        self.pomoTimer = PomoTimer(remainSessionDuration: remainSessionDuration)
         self.randomImage = String(Int.random(in: 1...3))
         self.pomoTimer.start(closeWindow)
     }
@@ -87,7 +89,7 @@ struct BreakTimeButtonStyle: ButtonStyle {
 
 struct BreakTime_Previews: PreviewProvider {
     static var previews: some View {
-        BreakTimeView()
+        BreakTimeView(isShortBreak: true)
             .environmentObject(Setting())
     }
 }

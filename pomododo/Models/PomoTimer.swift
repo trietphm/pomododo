@@ -11,7 +11,6 @@ import SwiftUI
 
 class PomoTimer: ObservableObject {
     @Published var remainSessionDuration: Int
-    @Published var sessionCount = 0
     @Published var timer: Timer?
     @Published var isRunning = false
     private var defaultSessionDuration: Int
@@ -50,7 +49,6 @@ class PomoTimer: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {timer in
             self.remainSessionDuration -= 1
             if self.remainSessionDuration == 0 {
-                self.sessionCount += 1
                 self.remainSessionDuration = self.defaultSessionDuration
                 timer.invalidate()
                 

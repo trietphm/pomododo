@@ -23,6 +23,7 @@ struct ContentInternalView: View {
 
     @State var isRunning = false
     @State private var showSetting = false
+    @State var sessionCount = 0
 
     init(_ pomoTimer: PomoTimer) {
         self.pomoTimer = pomoTimer
@@ -84,7 +85,7 @@ struct ContentInternalView: View {
                         .font(.subheadline)
                         .foregroundColor(Color.white)
                     
-                    Text("\(self.pomoTimer.sessionCount)/10")
+                    Text("\(self.sessionCount)/10")
                         .fontWeight(.light)
                         .font(.subheadline)
                         .foregroundColor(Color.white)
@@ -111,8 +112,10 @@ struct ContentInternalView: View {
     }
     
     func openBreakTimeView() {
+        self.sessionCount += 1
         self.settings.isBreakingTime = true
-        let controller = WindowController(rootView: BreakTimeView().environmentObject(self.settings))
+        let isShortBreak = self.sessionCount % self.settings.sessionsForLongBreak != 0
+        let controller = WindowController(rootView: BreakTimeView(isShortBreak: isShortBreak).environmentObject(self.settings))
         controller.window?.titlebarAppearsTransparent = true
         controller.showWindow(nil)
     }
